@@ -4,13 +4,13 @@ using System.Net.Http;
 using Newtonsoft.Json.Linq;
 
 /**
- * 实人认证接口示例代码
- * 接口文档: https://support.dun.163.com/documents/391676076156063744?docId=391677733860962304
+ * 人脸比对接口示例代码
+ * 接口文档: https://support.dun.163.com/documents/391676076156063744?docId=456323166182072320
  */
 
 namespace Com.Netease.Is.Authentication.Demo
 {
-    class RealPersonCheckAPIDemo
+    class FaceCompareCheckAPIDemo
     {
         public static void test()
         {
@@ -21,7 +21,7 @@ namespace Com.Netease.Is.Authentication.Demo
             /** 业务ID，易盾根据产品业务特点分配 */
             String businessId = "your_businessId";
             /** 验证接口地址 */
-            String apiUrl = "https://verify.dun.163.com/v1/rp/check";
+            String apiUrl = "https://verify.dun.163.com/v1/facecompare/check";
 
             Dictionary<String, String> parameters = new Dictionary<String, String>();
             long curr = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
@@ -35,11 +35,10 @@ namespace Com.Netease.Is.Authentication.Demo
             parameters.Add("nonce", new Random().Next().ToString());
 
             // 2.设置私有参数
-            parameters.Add("name", "张三");
-            parameters.Add("cardNo", "341622123456784317");
             parameters.Add("picType", "1");
-            parameters.Add("avatar", "http://123.jpg");
-            parameters.Add("callback", "XXXXXXXXX");
+            parameters.Add("avatar1", "http://123.jpg");
+            parameters.Add("avatar2", "http://123.jpg");
+            parameters.Add("dataId", "323311889");
 
             // 3.生成签名信息
             String signature = Utils.genSignature(secretKey, parameters);
